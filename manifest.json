@@ -1,14 +1,18 @@
 {
   "manifest_version": 2,
-
   "name": "Hippo CMS Console Helper",
   "description": "Keeps the tree view in sync with the detail view",
   "version": "1.0",
-
-"content_scripts": [
+  "content_scripts": [
     {
-      "matches": ["*://*/cms/console*", "*://*/console*"],
-      "js": ["jquery-3.2.1.min.js", "myscript.js"]
+      "matches": [
+        "*://*/cms/console*",
+        "*://*/console*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "myscript.js"
+      ]
     }
   ]
 }
