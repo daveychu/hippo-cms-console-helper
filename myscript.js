@@ -47,7 +47,7 @@ function getParameterByName (name, url) {
 }
 
 function updateAutoScroll (autoScroll) {
-  let border = '1px solid ' + (enabled ? '#90EE90' : 'red');
+  let border = '1px solid ' + (enabled ? '#90ee90' : 'red');
   autoScroll.css('border', border);
 }
 
@@ -61,6 +61,9 @@ function addButtons () {
   autoScroll.click(function () {
     enabled = !enabled;
     updateAutoScroll(autoScroll.find('a'));
+    if (enabled) {
+      syncTreeWithDetailView();
+    }
   });
   updateAutoScroll(autoScroll.find('a'));
 }
