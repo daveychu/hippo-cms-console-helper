@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Hippo CMS Console Helper",
   "description": "Keeps the tree view in sync with the detail view",
-  "version": "1.2",
+  "version": "1.2.1",
   "content_scripts": [
     {
       "matches": [
