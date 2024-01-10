@@ -1,25 +1,40 @@
 var currentPage = window.location.href;
-var container = $('#yui-gen11 > div > div');
+var container = $("#yui-gen11 > div > div");
 var enabled = false;
 
 addButtons();
 
-function syncTreeWithDetailView () {
+function syncTreeWithDetailView() {
   currentPage = window.location.href;
-  var stringsToFind = getParameterByName('path', currentPage).split('/');
+  var stringsToFind = getParameterByName("path", currentPage).split("/");
 
-  var divs = container.find("span:contains('" + stringsToFind[1] + "')").parent().parent().parent().nextAll();
+  var divs = container
+    .find("span:contains('" + stringsToFind[1] + "')")
+    .parent()
+    .parent()
+    .parent()
+    .nextAll();
   for (var i = 2, len = stringsToFind.length; i < len; i++) {
-    divs = divs.filter(function (index) {
-      return divs.eq(index).find("span:contains('" + stringsToFind[i] + "')").length > 0;
-    }).first().nextAll();
+    divs = divs
+      .filter(function (index) {
+        return (
+          divs.eq(index).find("span:contains('" + stringsToFind[i] + "')")
+            .length > 0
+        );
+      })
+      .first()
+      .nextAll();
   }
 
   var scrollTo = divs.first();
 
   //scroll element to center
-  var offset = scrollTo.offset().top - container.offset().top + container.scrollTop() - (container.height() / 2);
-  container.animate({scrollTop: offset});
+  var offset =
+    scrollTo.offset().top -
+    container.offset().top +
+    container.scrollTop() -
+    container.height() / 2;
+  container.animate({ scrollTop: offset });
 }
 
 setInterval(function () {
@@ -30,7 +45,7 @@ setInterval(function () {
 
 syncTreeWithDetailView();
 
-function getParameterByName (name, url) {
+function getParameterByName(name, url) {
   if (!url) {
     url = window.location.href;
   }
@@ -41,29 +56,33 @@ function getParameterByName (name, url) {
     return null;
   }
   if (!results[2]) {
-    return '';
+    return "";
   }
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-function updateAutoScroll (autoScroll) {
-  let border = '1px solid ' + (enabled ? '#90ee90' : 'red');
-  autoScroll.css('border', border);
+function updateAutoScroll(autoScroll) {
+  let border = "1px solid " + (enabled ? "#90ee90" : "red");
+  autoScroll.css("border", border);
 }
 
-function addButtons () {
-  var menu = $('.hippo-console-tree-add-property').parent();
-  let scroll = $('<li><a href="javascript:;"><span>Scroll from Source</span></a></li>');
+function addButtons() {
+  var menu = $(".hippo-console-tree-add-property").parent();
+  let scroll = $(
+    '<li><a href="javascript:;"><span>Scroll from Source</span></a></li>'
+  );
   scroll.appendTo(menu);
   scroll.click(syncTreeWithDetailView);
-  let autoScroll = $('<li><a href="javascript:;"><span>Autoscroll from Source</span></a></li>');
+  let autoScroll = $(
+    '<li><a href="javascript:;"><span>Autoscroll from Source</span></a></li>'
+  );
   autoScroll.appendTo(menu);
   autoScroll.click(function () {
     enabled = !enabled;
-    updateAutoScroll(autoScroll.find('a'));
+    updateAutoScroll(autoScroll.find("a"));
     if (enabled) {
       syncTreeWithDetailView();
     }
   });
-  updateAutoScroll(autoScroll.find('a'));
+  updateAutoScroll(autoScroll.find("a"));
 }
